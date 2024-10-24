@@ -43,7 +43,7 @@ SprintHub is a comprehensive full-stack Jira clone designed to simplify project 
 
 | Technology | Purpose |
 |------------|---------|
-| Next.js 14 | Frontend Framework |
+| Next.js 15 | Frontend Framework |
 | Appwrite SDK | Backend Services |
 | Shadcn UI | UI Components |
 | TailwindCSS | Styling |
