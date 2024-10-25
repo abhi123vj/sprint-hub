@@ -1,0 +1,1 @@
+export const AUTH_COOKIE_NAME = "4bh1-sprint-hub-session"

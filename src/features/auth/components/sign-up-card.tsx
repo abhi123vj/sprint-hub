@@ -29,11 +29,7 @@ import {
 import { registerSchema } from "../schemas";
 import { useRegister } from "../api/use-register";
 
-function onSubmit(values: z.infer<typeof registerSchema>) {
-  console.log(values);
-}
 export function SignUpCard() {
-  
   const { mutate } = useRegister();
 
   function onSubmit(values: z.infer<typeof registerSchema>) {
@@ -117,7 +113,7 @@ export function SignUpCard() {
                 </FormItem>
               )}
             />
-            <Button disabled={false} size={"lg"} className="w-full">
+            <Button type="submit" disabled={false} size={"lg"} className="w-full">
               Login
             </Button>
           </form>
@@ -143,7 +139,7 @@ export function SignUpCard() {
           className="w-full"
         >
           <FaGithub className="mr-2 size-5" />
-          Login with Google
+          Login with Github
         </Button>
       </CardContent>
       <div className="px-7">
@@ -151,7 +147,7 @@ export function SignUpCard() {
       </div>
       <CardContent className="p-7 flex  items-center justify-center">
         <p>
-          DAlready have an account?
+          Already have an account?
           <Link href={"/sign-in"}>
             <span className="text-blue-700">&nbsp;Sign In</span>
           </Link>
