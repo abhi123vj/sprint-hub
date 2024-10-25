@@ -18,21 +18,29 @@ import React from "react";
 import Link from "next/link";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
-import {  useForm } from "react-hook-form";
-import {Form, FormControl, FormField, FormItem, FormMessage } from "@/components/ui/form";
+import { useForm } from "react-hook-form";
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormMessage,
+} from "@/components/ui/form";
+import { registerSchema } from "../schemas";
+import { useRegister } from "../api/use-register";
 
-const formSchema = z.object({
-  name: z.string().trim().min(1, "Required"),
-  email: z.string().email(),
-  password: z.string().min(8),
-});
-
-function onSubmit(values: z.infer<typeof formSchema>) {
+function onSubmit(values: z.infer<typeof registerSchema>) {
   console.log(values);
 }
 export function SignUpCard() {
-  const form = useForm<z.infer<typeof formSchema>>({
-    resolver: zodResolver(formSchema),
+  
+  const { mutate } = useRegister();
+
+  function onSubmit(values: z.infer<typeof registerSchema>) {
+    mutate({ json: values });
+  }
+  const form = useForm<z.infer<typeof registerSchema>>({
+    resolver: zodResolver(registerSchema),
 
     defaultValues: {
       name: "",
@@ -60,8 +68,8 @@ export function SignUpCard() {
       </div>
       <CardContent className="p-7">
         <Form {...form}>
-          <form onSubmit={form.handleSubmit(onSubmit)}  className="space-y-4">
-          <FormField
+          <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
+            <FormField
               name="name"
               control={form.control}
               render={({ field }) => (
@@ -76,8 +84,8 @@ export function SignUpCard() {
                   <FormMessage />
                 </FormItem>
               )}
-            />     
-           <FormField
+            />
+            <FormField
               name="email"
               control={form.control}
               render={({ field }) => (
@@ -108,7 +116,7 @@ export function SignUpCard() {
                   <FormMessage />
                 </FormItem>
               )}
-            />     
+            />
             <Button disabled={false} size={"lg"} className="w-full">
               Login
             </Button>
