@@ -27,7 +27,7 @@ import { useLogin } from "../api/use-login";
 
 export function SignInCard() {
   
-  const {mutate} = useLogin();
+  const {mutate,isPending} = useLogin();
 
   const form = useForm<z.infer<typeof loginSchema>>({
     resolver: zodResolver(loginSchema),
@@ -83,7 +83,7 @@ export function SignInCard() {
                 </FormItem>
               )}
             />
-            <Button disabled={false} size={"lg"} className="w-full">
+            <Button disabled={isPending} size={"lg"} className="w-full">
               Login
             </Button>
           </form>
@@ -96,7 +96,7 @@ export function SignInCard() {
         <Button
           variant={"secondary"}
           size={"lg"}
-          disabled={false}
+          disabled={isPending}
           className="w-full"
         >
           <FcGoogle className="mr-2 size-5" />
@@ -105,7 +105,7 @@ export function SignInCard() {
         <Button
           variant={"secondary"}
           size={"lg"}
-          disabled={false}
+          disabled={isPending}
           className="w-full"
         >
           <FaGithub className="mr-2 size-5" />

@@ -30,7 +30,7 @@ import { registerSchema } from "../schemas";
 import { useRegister } from "../api/use-register";
 
 export function SignUpCard() {
-  const { mutate } = useRegister();
+  const { mutate , isPending } = useRegister();
 
   function onSubmit(values: z.infer<typeof registerSchema>) {
     mutate({ json: values });
@@ -113,8 +113,8 @@ export function SignUpCard() {
                 </FormItem>
               )}
             />
-            <Button type="submit" disabled={false} size={"lg"} className="w-full">
-              Login
+            <Button type="submit" disabled={isPending} size={"lg"} className="w-full">
+              Register
             </Button>
           </form>
         </Form>
@@ -126,7 +126,7 @@ export function SignUpCard() {
         <Button
           variant={"secondary"}
           size={"lg"}
-          disabled={false}
+          disabled={isPending}
           className="w-full"
         >
           <FcGoogle className="mr-2 size-5" />
@@ -135,7 +135,7 @@ export function SignUpCard() {
         <Button
           variant={"secondary"}
           size={"lg"}
-          disabled={false}
+          disabled={isPending}
           className="w-full"
         >
           <FaGithub className="mr-2 size-5" />
